@@ -10,7 +10,7 @@ Dependancies
 - django (tested with 1.3)
 - django-cms (tested with 2.2)
 - django-filer
-- django-tinymce
+- django-tinymce (optional)
 
 Getting Started
 =============
@@ -43,7 +43,7 @@ Usage
 
 This plugin actually gives you two different types of fancybox plugins, a 
 Fancybox Image Popup and a Fancybox Rich Text Popup, with plans for more 
-down the road, such as a video popup and an iframe popup).
+down the road, such as a video popup and an iframe popup.
 
 If you are using a Fancybox Image Popup, just drop the plugin in a Django
 CMS placeholder, enter the link text or select a link image from Filer, 
@@ -52,7 +52,9 @@ clicked.
 
 If you are using a Fancybox Rich Text Popup, just drop the plugin in a 
 Django CMS placeholder, enter the link text or select a link image from 
-Filer, and then enter the text to display when the link text/image is clicked.
+Filer, and then enter the text to display when the link text/image is 
+clicked.  If you have django-tinymce installed it you will be able to enter
+rich text, otherwise it's just a text field.
 
 
 TODO
