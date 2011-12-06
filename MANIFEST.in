@@ -1,0 +1,7 @@
+include AUTHORS
+include LICENSE
+include README.rst
+recursive-include cmsplugin_fancybox/templates/cmsplugin_fancybox *
+recursive-include cmsplugin_fancybox/static *
+
+

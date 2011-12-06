@@ -1,0 +1,19 @@
+{% load thumbnail %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        if (document.cmsFancyBoxLoaded == undefined){
+	        $("head").append('<link rel="stylesheet" href="{{ STATIC_URL }}cmsplugin_fancybox/fancybox/jquery.fancybox.css?v=2.0.3" type="text/css" media="screen" />');
+	        $("head").append('<scr' + 'ipt type="text/javascript" src="{{ STATIC_URL }}cmsplugin_fancybox/fancybox/jquery.fancybox.pack.js?v=2.0.3"></scr' + 'ipt>');
+	        $("head").append('<scr' + 'ipt type="text/javascript" src="{{ STATIC_URL }}cmsplugin_fancybox/js/cmsplugin_fancybox.js"></scr' + 'ipt>');
+        }
+    });
+</script>
+<a href="#fancybox_popup_{{ instance.id }}" class="cmsplugin_fancybox_link">
+{% if instance.link_image %}
+<img src="{% thumbnail instance.link_image instance.get_link_image_dimensions %}" alt="{{ instance.link_text }}" />
+{% else %}
+{{ instance.link_text }}
+{% endif %}
+</a>
+<span style="display: none;" class="fancybox_container" id="fancybox_popup_{{ instance.id }}">{{ instance.popup_text|safe }}</span>
+
