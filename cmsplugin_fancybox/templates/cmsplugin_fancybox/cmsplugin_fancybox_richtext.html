@@ -1,19 +1,28 @@
-{% load thumbnail %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        if (document.cmsFancyBoxLoaded == undefined){
-	        $("head").append('<link rel="stylesheet" href="{{ STATIC_URL }}cmsplugin_fancybox/fancybox/jquery.fancybox.css?v=2.0.3" type="text/css" media="screen" />');
-	        $("head").append('<scr' + 'ipt type="text/javascript" src="{{ STATIC_URL }}cmsplugin_fancybox/fancybox/jquery.fancybox.pack.js?v=2.0.3"></scr' + 'ipt>');
-	        $("head").append('<scr' + 'ipt type="text/javascript" src="{{ STATIC_URL }}cmsplugin_fancybox/js/cmsplugin_fancybox.js"></scr' + 'ipt>');
-        }
-    });
-</script>
+{% load thumbnail sekizai_tags %}
+
+{% addtoblock "css" %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}cmsplugin_fancybox/fancybox/jquery.fancybox.css" />
+{% endaddtoblock %}
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}cmsplugin_fancybox/js/jquery.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}cmsplugin_fancybox/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}cmsplugin_fancybox/js/cmsplugin_fancybox.js"></script>
+{% endaddtoblock %}
+
 <a href="#fancybox_popup_{{ instance.id }}" class="cmsplugin_fancybox_link">
 {% if instance.link_image %}
-<img src="{% thumbnail instance.link_image instance.get_link_image_dimensions %}" alt="{{ instance.link_text }}" />
+<img src="{% thumbnail instance.link_image instance.get_link_image_dimensions %}" 
+    alt="{{ instance.link_text }}" 
+    {% if instance.link_image_alignment %}class="{{ instance.link_image_alignment }}"{% endif %} />
 {% else %}
-{{ instance.link_text }}
+{{ instance.link_text|safe }}
 {% endif %}
 </a>
-<span style="display: none;" class="fancybox_container" id="fancybox_popup_{{ instance.id }}">{{ instance.popup_text|safe }}</span>
-
+<textarea style="display: none;" id="fancybox_raw_content_{{ instance.id }}">
+    {{ instance.popup_text|safe }}
+</textarea>
+<script type="text/javascript">
+    var $container = $('<div style="display: none;" class="fancybox_container" id="fancybox_popup_{{ instance.id }}">')
+    $container.html($("#fancybox_raw_content_{{ instance.id }}").val());
+    $("body").append($container);
+</script>

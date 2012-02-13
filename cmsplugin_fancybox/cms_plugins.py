@@ -4,14 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from cmsplugin_fancybox.models import FancyBoxPlugin
-from cmsplugin_fancybox.forms import FancyBoxImagePluginForm, FancyBoxRichTextPluginForm
+from cmsplugin_fancybox.forms import FancyBoxImagePluginForm, FancyBoxRichTextPluginForm, FancyBoxSnippetPluginForm
+
 
 class CMSFancyBoxImagePlugin(CMSPluginBase):
     model = FancyBoxPlugin
     form = FancyBoxImagePluginForm
     name = _("Fancybox Image Popup")
     render_template = "cmsplugin_fancybox/cmsplugin_fancybox_image.html"
-
+    text_enabled = True
+    
     def render(self, context, instance, placeholder):
         context.update({
             'instance': instance,
@@ -24,6 +26,21 @@ class CMSFancyBoxRichTextPlugin(CMSPluginBase):
     form = FancyBoxRichTextPluginForm
     name = _("Fancybox Rich Text Popup")
     render_template = "cmsplugin_fancybox/cmsplugin_fancybox_richtext.html"
+    text_enabled = True
+    
+    def render(self, context, instance, placeholder):
+        context.update({
+            'instance': instance,
+        })
+        return context
+        
+        
+class CMSFancyBoxSnippetPlugin(CMSPluginBase):
+    model = FancyBoxPlugin
+    form = FancyBoxSnippetPluginForm
+    name = _("Fancybox Snippet Popup")
+    render_template = "cmsplugin_fancybox/cmsplugin_fancybox_richtext.html"
+    text_enabled = True
 
     def render(self, context, instance, placeholder):
         context.update({
@@ -34,3 +51,5 @@ class CMSFancyBoxRichTextPlugin(CMSPluginBase):
 
 plugin_pool.register_plugin(CMSFancyBoxImagePlugin)
 plugin_pool.register_plugin(CMSFancyBoxRichTextPlugin)
+plugin_pool.register_plugin(CMSFancyBoxSnippetPlugin)
+

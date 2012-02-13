@@ -12,6 +12,7 @@ class FancyBoxPlugin(CMSPlugin):
     link_image = FilerImageField(null=True, blank=True, default=None, related_name='fancyboxplugin_set_link_image')
     link_image_height = models.PositiveIntegerField(blank=True, null=True)
     link_image_width = models.PositiveIntegerField(blank=True, null=True)
+    link_image_alignment = models.CharField(max_length=100, blank=True, null=True, choices=(('left', 'Left'), ('right', 'Right')))
     
     target_image = FilerImageField(null=True, related_name='fancyboxplugin_set_target_image')
     target_image_height = models.PositiveIntegerField(blank=True, null=True)
