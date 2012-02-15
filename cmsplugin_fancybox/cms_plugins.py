@@ -16,6 +16,7 @@ class CMSFancyBoxImagePlugin(CMSPluginBase):
     
     def render(self, context, instance, placeholder):
         context.update({
+            'placeholder': placeholder,
             'instance': instance,
         })
         return context
@@ -30,6 +31,7 @@ class CMSFancyBoxRichTextPlugin(CMSPluginBase):
     
     def render(self, context, instance, placeholder):
         context.update({
+            'placeholder': placeholder,
             'instance': instance,
         })
         return context
@@ -44,6 +46,7 @@ class CMSFancyBoxSnippetPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         context.update({
+            'placeholder': placeholder,
             'instance': instance,
         })
         return context
